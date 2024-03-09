@@ -34,6 +34,7 @@ class weatherData:
                 self.minTemp = i
             elif i > self.maxTemp:
                 self.maxTemp = i
+        self.city = r["properties"]["relativeLocation"]["properties"]["city"]
 
             
 
@@ -51,6 +52,9 @@ class weatherData:
     
     def getMinTemp(self):
         return self.minTemp
+    
+    def getCity(self):
+        return self.city
 
 
 
