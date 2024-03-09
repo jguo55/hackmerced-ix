@@ -4,8 +4,12 @@ import './App.css'
 function App() {
   const [data, setData] = useState([{}])
 
+  const [latitude, setLatitude] = useState(37)
+  const [longitude, setLongitude] = useState(-120.4243)
+
+
   useEffect(() => {
-    fetch("/result").then(
+    fetch(`/result?latitude=${latitude}&longitude=${longitude}`).then(
       res => res.json()
     ).then(
       data => {
