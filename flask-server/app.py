@@ -10,14 +10,14 @@ def result():
     try:
         w = weatherData(request.args.get('latitude'), request.args.get('longitude'))
     except:
-        return 400
+        return {"code": 400}
     #calculations here
 
     return{
-        "result": res,
-        "cats": ["tabby", "leopard"],
+        "code": 200,
         "latitude": w.getLatitude(),
-        "longitude": w.getLongitude()
+        "longitude": w.getLongitude(),
+        "humidity": w.getHumidity()
         }
 
 
