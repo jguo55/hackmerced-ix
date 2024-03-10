@@ -16,19 +16,30 @@ function App() {
   const [spacing, setSpacing] = useState('')
 
   const fetchData = async() => {
+      setData([{"code": 199}])
       const res = await (await fetch(`/result?latitude=${latitude}&longitude=${longitude}&crop=${crop}&stage=${stage}&area=${area}&evaRate=${evaRate}&spacing=${spacing}`)).json()
       setData(res)
     }
 
   function checkResponse(data){
     if (typeof data.code === "undefined"){
-      return <p><i>Awaiting User Input</i></p>
+      return <p><i>Awaiting User Input/Loading...</i></p>
     }
     else if(data.code === 400){
       return <p>Error 400: Bad Input</p>
     }
+    if (typeof data.code === 199){
+      return <p><i>Loading...</i></p>
+    }
     else if(data.code === 200){
-      return <p>{data.humidity}</p>
+      return <p><b>{data.water} gallons/day for field size {data.area} acres </b><br></br>
+      <i>Params:</i> <br></br>
+      Latitude: {data.latitude} <br></br>
+      Longitude: {data.longitude} <br></br>
+      Area: {data.area} acres <br></br>
+      Evaporation Rate: {data.evaRate} gallons/day<br></br>
+      Wind Speed: {data.windSpeed} mph
+      </p>
     }
   }
 
