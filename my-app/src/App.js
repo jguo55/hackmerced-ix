@@ -86,7 +86,7 @@ function App() {
                     onChange={e=>setArea(e.target.value)}/>
                 </div>
                 <div className = "col-12">
-                  <label>Evaporation Rate:</label>
+                  <label>Evaporation Rate (Leave blank for default):</label>
                 <input
                     type='text'
                     placeholder='Enter Evaporation Rate (gallons/day)'
