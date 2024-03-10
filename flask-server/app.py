@@ -1,35 +1,7 @@
 #water optimization for irrigation
 from weatherData import weatherData
 from flask import Flask, request
-
-''' while True:
-    try:
-        latitude = float(input("Enter your latitude: \n"))
-    except ValueError:
-        print("An error occured, please try again.")
-        continue
-    else:
-        break
-
-while True:
-    try:
-        longitude = float(input("Enter your latitude: \n"))
-    except ValueError:
-        print("An error occured, please try again.")
-        continue
-    else:
-        break
-
-
-while True:
-    try:
-        w = weatherData(latitude,longitude)
-    except:
-        print("An error occured, please try again.")
-        continue
-    else:
-        break '''
-
+import math
 res = 0
 
 app = Flask(__name__)
@@ -39,16 +11,26 @@ def result():
     try:
         w = weatherData(request.args.get('latitude'), request.args.get('longitude'))
     except:
-        return {
-            "result": "An error occurred. Ensure that your parameters are valid."
-        }
+        return {"code": 400}
     #calculations here
 
+    if(w.getMinTemp<0):
+        temp = (w.getMinTemp-32)/1.8+273.15
+    else:
+        temp = 1;
+    vaporPressure = math.exp(20.386-5132/(temp+273.15))
+    evoRate = 7.4*vaporPressure*request.args.get("area")*43560(0.447*w.getWindSpeed)**0.78/(w.getMinTemp+459.67)/1.4
+    totalWater = plantUsage + evoRate;
     return{
-        "result": res,
-        "cats": ["tabby", "leopard"]
+        "code": 200,
+        "link": w.getLink(),
+        "latitude": w.getLatitude(),
+        "longitude": w.getLongitude(),
+        "humidity": w.getHumidity(),
+        "windSpeed": w.getWindSpeed()
+        "water": totalWater
         }
 
 
-if __name__ == "__main__":
+if __name__ == "__app__":
     app.run(debug=True)
