@@ -40,7 +40,6 @@ def result():
     cropStage = request.args.get('stage').lower()
     latitude = request.args.get('latitude')
     longitude = request.args.get('longitude')
-    spacing = request.args.get('spacing')
 
     try:
         w = weatherData(latitude, longitude)
@@ -48,13 +47,11 @@ def result():
         return {"code": 400}
     #calculations here
 
-    if(w.getMinTemp()>0):
-        temp = (w.getMinTemp() - 32) / 1.8 + 273.15
-    else:
-        temp = 256
-    vaporPressure = math.exp(20.386 - (5132 / (w.getMinTemp() + 273.15)))
+    temp = (w.getMinTemp() - 32) * 5/9 + 273.15
+
+    vaporPressure = math.exp(20.386 - (5132/temp))
     if evaRate == '':
-        evaRate = ((7.4 * vaporPressure * float(area) * 43560 * (0.447 * w.getWindSpeed()) ** 0.78) / ((w.getMinTemp() + 459.67))) / 1.4
+        evaRate = ((7.4 * vaporPressure * float(area) * 43560 * (0.447 * w.getWindSpeed()) ** 0.78) / ((w.getMinTemp() + 459.67))) / 1.8
     else:
         evaRate = 4047 * float(area) * float(evaRate)
     
@@ -68,7 +65,7 @@ def result():
     else:
         mult = crops[crop][3] #middle
 
-    plantUsage = waterUsage * mult * float(area)*43560/float(spacing)**2
+    plantUsage = waterUsage * 0.264172 * float(mult) * float(area)*4047
 
     totalWater = plantUsage + evaRate
     return{
@@ -80,7 +77,10 @@ def result():
         "windSpeed": w.getWindSpeed(),
         "water": format(totalWater, ".2f") ,
         "evaRate": evaRate,
-        "area": area
+        "area": area,
+        "crop": crop,
+        "stageMult": mult,
+        "plantUsage": plantUsage
         }
 
 
