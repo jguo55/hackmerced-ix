@@ -13,9 +13,10 @@ function App() {
   const [area, setArea] = useState('')
   const [stage, setStage] = useState('')
   const [evaRate, setEvaRate] = useState('')
+  const [spacing, setSpacing] = useState('')
 
   const fetchData = async() => {
-      const res = await (await fetch(`/result?latitude=${latitude}&longitude=${longitude}&crop=${crop}&stage=${stage}&area=${area}&evaRate=${evaRate}`)).json()
+      const res = await (await fetch(`/result?latitude=${latitude}&longitude=${longitude}&crop=${crop}&stage=${stage}&area=${area}&evaRate=${evaRate}&spacing=${spacing}`)).json()
       setData(res)
     }
 
@@ -34,7 +35,7 @@ function App() {
   return (
     <div id="wrapper">
       <header id="header">
-      <h1><strong>Minimum Crop Water Usage</strong></h1>
+      <h1><strong>Crop Irrigation Water Calculator</strong></h1>
       <h2><em>A solution to watering and irrigation</em></h2>
       <i>Disclaimer: Tool Works in US only. <br></br> </i>
       ⓘ <i>Valid US coordinates range from latitudes of around 30 to 45 and longitudes of around -120 to -75. </i>
@@ -88,6 +89,8 @@ function App() {
                     <option value="onion">Onion</option>
                     <option value="pepper">Pepper</option>
                     <option value="tomato">Tomato</option>
+                    <option value="watermelon">Watermelon</option>
+
                   </select>
                 </div>
                 <div className="col-6 col-12-xsmall">
@@ -99,12 +102,19 @@ function App() {
                     <option value="final">Final</option>
                   </select>
                 </div>
-                <div className="col-12">
+                <div className="col-6 col-12-xsmall">
                   <input
                     type='text'
                     placeholder='Enter Area (Acres)'
                     value = {area}
                     onChange={e=>setArea(e.target.value)}/>
+                </div>
+                <div className="col-6 col-12-xsmall">
+                  <input
+                    type='text'
+                    placeholder='Enter Distance between plants (ft)'
+                    value = {spacing}
+                    onChange={e=>setSpacing(e.target.value)}/>
                 </div>
                 <div className = "col-12">
                   <label>Evaporation Rate (gallons/m^2):</label>
@@ -135,16 +145,28 @@ function App() {
               </span>
             </h2> 
             <p>
-              Water is an essential and limited resource. This tool allows farmers to calculate the <em>minimum</em> amount of water
-              they need in order to keep their plants happy. (insert more yapping)
+            Water is an essential and limited resource. Conserving water helps to preserve our natural ecosystems and biodiversity, 
+            which depend on water cycles to thrive. Large campaigns were run around the nation asking individual people to conserve
+            water on their lawns, but another large source of freshwater usage comes from farming and irrigation systems.
+            Water is wasted when there is runoff and crops are overwatered.
             </p>
             <h4>Thought Process
             </h4>
 
             <p>
-              If we are able to optimize watering of crops by determining more precise values, more water will be conserved
-              and crop yield will be higher. (more yapping, specifically about how the calculations are done) (put some graphs here
-              and i think we're set)
+              If we would somehow optimize the watering of crops by giving an estimate to farmers of their water usage,
+              more water would be conserved, and crop yield would be higher.</p>
+              <p>
+              To optimize irrigation, we had to restrict a lot of variables. The factors we took into account were water consumption of a crop type and evaporation, but we decided against calculating runoff, transpiration, precipitation, and condensation. 
+              With our inputs decided, we looked for formulas to use. Since the most accurate formulas required complex calculations 
+              that we were not able to do with our given inputs, we chose to estimate it with a formula for the evaporation rate
+              of a swimming pool, and multiplying the result by a factor that we derived by matching the result with actual
+               results from data we found. We ended up making this factor 0.71. </p>
+               <p>
+            The formula we found also required the vapor pressure, which we found a simple equation online that took the temperature
+            to estimate the vapor pressure of water. With these formulas, we tweaked the inputs necessary by the user to make sure
+            that the output was calculable, and added the evaporation per day to the amount of water necessary to grow a plant
+            per day to get the minimum amount of water needed to grow the crop type in a specified area.
             </p>
             <h4>Solution             
               <span className="image left">
