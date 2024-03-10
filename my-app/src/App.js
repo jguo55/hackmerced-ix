@@ -67,6 +67,27 @@ function App() {
                     <option value="tobacco">Tobacco</option>
                     <option value="maize">Maize</option>
                     <option value="sorghum">Sorghum</option>
+                    <option value="wheat">Wheat</option>
+                    <option value="cotton">Cotton</option>
+                    <option value="alfalfa">Alfalfa</option>
+                    <option value="banana">Banana</option>
+                    <option value="citrus">Citrus</option>
+                    <option value="grape">Grape</option>
+                    <option value="pineapple">Pineapple</option>
+                    <option value="potato">Potato</option>
+                    <option value="groundnut">Groundnut</option>
+                    <option value="olive">Olive</option>
+                    <option value="safflower">Safflower</option>
+                    <option value="soybean">Soybean</option>
+                    <option value="sunflower">Sunflower</option>
+                    <option value="bean">Bean</option>
+                    <option value="pea">Pea</option>
+                    <option value="sugar beet">Sugar Beet</option>
+                    <option value="sugarcane">Sugarcane</option>
+                    <option value="cabbage">Cabbage</option>
+                    <option value="onion">Onion</option>
+                    <option value="pepper">Pepper</option>
+                    <option value="tomato">Tomato</option>
                   </select>
                 </div>
                 <div className="col-6 col-12-xsmall">
