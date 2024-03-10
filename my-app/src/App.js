@@ -12,9 +12,10 @@ function App() {
   const [crop, setCrop] = useState('')
   const [area, setArea] = useState('')
   const [stage, setStage] = useState('')
+  const [evaRate, setEvaRate] = useState('')
 
   const fetchData = async() => {
-      const res = await (await fetch(`/result?latitude=${latitude}&longitude=${longitude}&crop=${crop}&stage=${stage}&area=${area}`)).json()
+      const res = await (await fetch(`/result?latitude=${latitude}&longitude=${longitude}&crop=${crop}&stage=${stage}&area=${area}&evaRate=${evaRate}`)).json()
       setData(res)
     }
 
@@ -72,6 +73,7 @@ function App() {
                   <select name="stage" id="stage" onChange={e=>setStage(e.target.value)}>
                   <option value>- Select a stage -</option>
                     <option value="inital">Initial</option>
+                    <option value="development">Development</option>
                     <option value="middle">Middle</option>
                     <option value="final">Final</option>
                   </select>
@@ -82,6 +84,14 @@ function App() {
                     placeholder='Enter Area (Acres)'
                     value = {area}
                     onChange={e=>setArea(e.target.value)}/>
+                </div>
+                <div className = "col-12">
+                  <label>Evaporation Rate (gallons/m^2):</label>
+                <input
+                    type='text'
+                    placeholder='Leave blank for default upper bound value'
+                    value = {evaRate}
+                    onChange={e=>setEvaRate(e.target.value)}/>
                 </div>
                 <div className="col-12">
                   <ul className="actions">

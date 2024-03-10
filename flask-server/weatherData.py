@@ -7,7 +7,7 @@
 
 import requests
 
-class weatherData:
+class weatherData:   
     def __init__(self, latitude, longitude):
         self.longitude = longitude
         self.latitude = latitude
@@ -16,17 +16,18 @@ class weatherData:
         office = r["properties"]["gridId"]
         gridX = r["properties"]["gridX"]
         gridY = r["properties"]["gridY"]
-        r2 = requests.get(f"https://api.weather.gov/gridpoints/{office}/{gridX},{gridY}/forecast/hourly", headers = headers).json()
+        self.link = f"https://api.weather.gov/gridpoints/{office}/{gridX},{gridY}/forecast/hourly"
+        r2 = requests.get(self.link, headers = headers).json()
         periods = r2["properties"]["periods"]
         temps = []
         humidities = []
+        windSpeeds = []
         for i in range(24):
             humidities.append(periods[i]["relativeHumidity"]["value"])
             temps.append(periods[i]["temperature"])
-        total = 0
-        for x in humidities:
-            total += x
-        self.humidity = total/len(humidities) #avg humidity
+            windSpeeds.append(int(periods[i]["windSpeed"].split()[0]))
+        self.windSpeed = sum(windSpeeds)/len(windSpeeds)
+        self.humidity = sum(humidities)/len(humidities)
         self.minTemp = 100
         self.maxTemp = -100
         for i in temps:
@@ -55,6 +56,11 @@ class weatherData:
     
     def getCity(self):
         return self.city
+    
+    def getLink(self):
+        return self.link
 
+    def getWindSpeed(self):
+        return self.windSpeed
 
 
