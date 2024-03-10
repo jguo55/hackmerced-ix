@@ -1,3 +1,9 @@
 # hackmerced-ix
-flask run - runs backend
-npm start - starts frontend server
+Crop Irrigation Water Calculator  
+Dependencies: 
+-python: flask, requests  
+-node: react  
+To start app:  
+flask run - runs backend for calculations  
+npm start - starts frontend application  
+Then visit "http://localhost:3000"
