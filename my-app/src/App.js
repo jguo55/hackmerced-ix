@@ -1,6 +1,8 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import './styles/assets/css/main.css'
 import MyLocation from './Location.js'
+import spout from './assets/spout.jpg'
+import irrigation from './assets/Irrigation.jpg'
 
 function App() {
   const [data, setData] = useState([{}])
@@ -35,14 +37,14 @@ function App() {
       <h2><em>A solution to watering and irrigation</em></h2>
       <i>Disclaimer: Tool Works in US only. <br></br> </i>
       ⓘ <i>Valid US coordinates range from latitudes of around 30 to 45 and longitudes of around -120 to -75. </i>
-      </header>
       <hr></hr>
+      </header>
       <div id="main">
         <section id = "content" className="main">
           <section><MyLocation/></section>
           <hr></hr>
           <section>
-            <h2>User Inputs</h2>
+            <h2>User Inputs:</h2>
               <div className="row gtr-uniform">
                 <div className="col-6 col-12-xsmall">
                   <input 
@@ -92,11 +94,39 @@ function App() {
           </section>
           <hr></hr>
           <section>
-              <h2><b>Result</b></h2> <h3>{checkResponse(data)}</h3>
+              <h2><b>Result:</b></h2> <h3>{checkResponse(data)}</h3>
+          </section>
+          <hr></hr>
+          <section>
+            <h2><i>Background:</i>
+           <span className="image right">
+                <img src={irrigation} alt="irrigation" width={200} height={200}></img>
+              </span>
+            </h2> 
+            <p>
+              Water is an essential and limited resource. This tool allows farmers to calculate the <em>minimum</em> amount of water
+              they need in order to keep their plants happy. (insert more yapping)
+            </p>
+            <h4>Thought Process
+            </h4>
+
+            <p>
+              If we are able to optimize watering of crops by determining more precise values, more water will be conserved
+              and crop yield will be higher. (more yapping, specifically about how the calculations are done) (put some graphs here
+              and i think we're set)
+            </p>
+            <h4>Solution             
+              <span className="image left">
+                <img src={spout} alt="water spout" width={200} height={200}></img>
+              </span></h4>
+            <p>
+              With this information, etc
+            </p>
           </section>
       </section>
       </div>
       <hr></hr>
+
       <footer id="footer">
         <section>
           <h2>Credits</h2>
