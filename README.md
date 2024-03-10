@@ -1,6 +1,6 @@
 # hackmerced-ix
 Crop Irrigation Water Calculator  
-Dependencies: 
+Dependencies:  
 -python: flask, requests  
 -node: react  
 To start app:  
