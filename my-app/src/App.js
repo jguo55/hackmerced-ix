@@ -90,6 +90,7 @@ function App() {
                     <option value="pepper">Pepper</option>
                     <option value="tomato">Tomato</option>
                     <option value="watermelon">Watermelon</option>
+
                   </select>
                 </div>
                 <div className="col-6 col-12-xsmall">
