@@ -18,7 +18,7 @@ function MyLocation() {
 
   return (
     <div>
-      <h2>My Current Location</h2>
+      <h2>Current Location:</h2>
       {position.latitude && position.longitude ? (
         <p>
           Latitude: {position.latitude} <br></br>
