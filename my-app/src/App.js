@@ -86,10 +86,10 @@ function App() {
                     onChange={e=>setArea(e.target.value)}/>
                 </div>
                 <div className = "col-12">
-                  <label>Evaporation Rate (Leave blank for default):</label>
+                  <label>Evaporation Rate (gallons/m^2):</label>
                 <input
                     type='text'
-                    placeholder='Enter Evaporation Rate (gallons/day)'
+                    placeholder='Leave blank for default upper bound value'
                     value = {evaRate}
                     onChange={e=>setEvaRate(e.target.value)}/>
                 </div>
