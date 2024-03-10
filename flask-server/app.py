@@ -15,11 +15,13 @@ def result():
 
     return{
         "code": 200,
+        "link": w.getLink(),
         "latitude": w.getLatitude(),
         "longitude": w.getLongitude(),
-        "humidity": w.getHumidity()
+        "humidity": w.getHumidity(),
+        "windSpeed": w.getWindSpeed()
         }
 
 
-if __name__ == "__main__":
+if __name__ == "__app__":
     app.run(debug=True)
