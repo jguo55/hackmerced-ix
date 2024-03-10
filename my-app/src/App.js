@@ -142,7 +142,7 @@ function App() {
           </section>
           <hr></hr>
           <section>
-            <h2>Background:<h2/>
+            <h2>Background:
            <span className="image right">
                 <img src={irrigation} alt="irrigation" width={200} height={200}></img>
               </span>
